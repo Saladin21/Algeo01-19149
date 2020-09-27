@@ -116,6 +116,19 @@ public class Matriks {
 
 
     /*OBE*/
+    public static void transposeMatriks(Matriks M){
+        /**KAMUS LOKAL */
+        int i, j;
+        float temp;
+        /**ALGORITMA */
+        for (i=M.FirsIdxBrs; i<=M.LastIdxBrs; i++){
+            for (j=M.FirstIdxKol; j<=M.LastIdxKol; j++){
+                temp = M.isi[i][j];
+                M.isi[i][j] = M.isi[j][i];
+                M.isi[j][i] = temp;
+            }
+        }
+    }
     public static void TukarBrs(Matriks M, int r1, int r2){ //Menukar elemen baris r1 dan r2
         /**KAMUS LOKAL */
         int j;
@@ -147,12 +160,127 @@ public class Matriks {
         }
     }
 
+    //Asumsi Matriks berukuran nxn atau NeffBrs == NeffKol
+    public static float DeterminanKofaktor(Matriks M){
+        /**KAMUS LOKAL */
+        int i,j,k;
+        int sign;
+        Matriks Mnxt = new Matriks();
+        float det;
+        int i2, j2;
+
+        /**ALGORITMA */
+        if(M.NbElmt == 4){
+            return ((M.isi[0][0] * M.isi[1][1]) - (M.isi[0][1] * M.isi[1][0]));
+        } else{
+            sign = 1;
+            det = 0;
+            for (i=M.FirsIdxBrs ; i<=M.LastIdxBrs; i++){
+                Matriks.MakeEmpty(Mnxt, M.BrsEff-1, M.KolEff-1);
+                i2 = -1;
+                for (j=M.FirsIdxBrs; j<=M.LastIdxBrs; j++){
+                    i2++;
+                    if (j==0){
+                        j++;
+                    }
+                    j2 = -1;
+                    for (k=M.FirstIdxKol; k<=M.LastIdxKol; k++){
+                        j2++;
+                        if (k == i){
+                            k++;
+                        }
+                        Mnxt.isi[i2][j2] = M.isi[j][k];
+                    }
+                }
+                det += M.isi[0][i] * Matriks.DeterminanKofaktor(Mnxt) * sign;
+                sign *= -1;
+            }
+        }
+        return det;
+    }
+
+    public static Matriks buangBrKolMatriks(Matriks M, int a, int b){
+        /**KAMUS LOKAL */
+        int j,k;
+        Matriks Mnxt = new Matriks();
+        int i2, j2;
+
+        /**ALGORITMA */
+        MakeEmpty(Mnxt, M.BrsEff-1, M.KolEff-1);
+        i2 = -1;
+        for (j=M.FirsIdxBrs; j<=M.LastIdxBrs; j++){
+            i2++;
+            if (j==a){
+                j++;
+            }
+            j2 = -1;
+            for (k=M.FirstIdxKol; k<=M.LastIdxKol; k++){
+                j2++;
+                if (k == b){
+                    k++;
+                }
+                Mnxt.isi[i2][j2] = M.isi[j][k];
+            }
+        }
+        return Mnxt;
+    }
+
+    //Asumsi Matriks berukuran nxn atau NeffBrs == NeffKol
+    public static Matriks matriksKofaktor(Matriks M){
+        /**KAMUS LOKAL */
+        int i, j;
+        Matriks Mkof = new Matriks();
+        int sign = 1;
+        /**ALGORITMA */
+        Matriks.MakeEmpty(Mkof, M.BrsEff, M.KolEff);
+        for (i=M.FirsIdxBrs; i<=M.LastIdxBrs; i++){
+            for (j=M.FirstIdxKol; j<=M.LastIdxKol; j++){
+                Mkof.isi[i][j] = Matriks.DeterminanKofaktor(Matriks.buangBrKolMatriks(M, i, j)) * sign;
+                if (Matriks.DeterminanKofaktor(Matriks.buangBrKolMatriks(M, i, j))==0 && sign ==-1){
+                    Mkof.isi[i][j] = 0;
+                }
+                sign *= -1;
+            }
+        }
+        return Mkof;
+    }
+
+    //Asumsi Matriks berukuran nxn atau NeffBrs == NeffKol
+    public static Matriks inverseMatriks(Matriks M){
+        /**KAMUS LOKAL */
+        int i, j;
+        float determinan;
+        /**ALGORITMA */
+        Matriks matriksInverse = new Matriks();
+        Matriks matriksAdj = new Matriks();
+        Matriks.MakeEmpty(matriksInverse, M.BrsEff, M.KolEff);
+        matriksAdj = Matriks.matriksKofaktor(M);
+        Matriks.transposeMatriks(matriksAdj);
+        determinan = Matriks.DeterminanKofaktor(M);
+        for (i=M.FirsIdxBrs; i<=M.LastIdxBrs; i++){
+            for (j=M.FirstIdxKol; j<=M.LastIdxKol; j++){
+                matriksInverse.isi[i][j] = matriksAdj.isi[i][j] / determinan ;
+            }
+        }
+        return matriksInverse;
+    }
+
     public static void main(String[] args) {
         Matriks M = new Matriks();
         Matriks.BacaKeyboard(M);
         Matriks.TulisLayar(M);
+        System.out.print("\n");
         Matriks.TukarBrs(M, 0, 1);
         Matriks.TulisLayar(M);
+        System.out.print("\n");
+        float determinan = Matriks.DeterminanKofaktor(M);
+        System.out.printf("%.2f", determinan);
+        System.out.print("\n");
+        Matriks.TulisLayar(Matriks.buangBrKolMatriks(M, 0, 0));
+        System.out.print("\n");
+        Matriks.TulisLayar(Matriks.matriksKofaktor(M));
+        System.out.print("\n");
+        Matriks.TulisLayar(Matriks.inverseMatriks(M));
     }
 
 }
