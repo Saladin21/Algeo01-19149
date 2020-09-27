@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Matriks",
+            "request": "launch",
+            "mainClass": "Matriks",
+            "projectName": "Algeo01-19149_9dfd172e"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -18,6 +25,5 @@
             "projectName": "Algeo01-19149_9dfd172e",
             "vmArgs": "--enable-preview"
         }
-        
     ]
 }
