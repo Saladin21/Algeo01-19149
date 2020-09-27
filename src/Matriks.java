@@ -42,6 +42,18 @@ public class Matriks {
         baca.close();
     }
 
+    public static void BacaFile(Matriks M){
+        /**KAMUS LOKAL */
+        Scanner baca = new Scanner(System.in);
+        String namaFile;
+        /**ALGORITMA */
+        System.out.print("Masukkan nama file yang akan dibaca: ");
+        namaFile = baca.nextLine();
+
+
+        baca.close();
+    }
+
     public static void TulisLayar (Matriks M){
         /**KAMUS LOKAL */
         int i, j;
@@ -51,6 +63,30 @@ public class Matriks {
                 System.out.print(M.isi[i][j] + " ");
             }
             System.out.println("");
+        }
+    }
+
+    public static void TulisFile (Matriks M){
+        /**KAMUS LOKAL */
+
+        /**ALGORITMA */
+    }
+
+    public static void CopyMatriks(Matriks M1, Matriks M2){ //Menyalin elemen M ke M2
+        /**KAMUS LOKAL */
+        int i, j;
+
+        /**Algoritma */
+        M2.BrsEff = M1.BrsEff;
+        M2.KolEff = M1.KolEff;
+        M2.NbElmt = M2.BrsEff * M2.KolEff;
+        M2.LastIdxBrs = M2.BrsEff - 1 + M2.FirsIdxBrs;
+        M2.LastIdxKol = M2.KolEff -1 + M2.FirstIdxKol;
+        
+        for (i=M2.FirsIdxBrs;i<=M2.LastIdxBrs;i++){
+            for (j=M2.FirstIdxKol;j<=M2.LastIdxKol;j++){
+                M2.isi[i][j] = M1.isi[i][j];
+            }
         }
     }
 
@@ -113,7 +149,15 @@ public class Matriks {
         return SegiTigaBawah;
     }
 
+    public static boolean IsEselon (Matriks M){
+        /**KAMUS LOKAL */
+        boolean eselon;
 
+        /**ALGORITMA */
+        eselon = true;
+        return eselon;
+
+    }
 
     /*OBE*/
     public static void transposeMatriks(Matriks M){
