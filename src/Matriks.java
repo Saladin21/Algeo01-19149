@@ -149,13 +149,66 @@ public class Matriks {
         return SegiTigaBawah;
     }
 
-    public static boolean IsEselon (Matriks M){
+    public static boolean IsEselon (Matriks M){ //Mengecek apakah matriks M adalah matriks eselon
         /**KAMUS LOKAL */
-        boolean eselon;
-
+        boolean eselon, foundLone;
+        int i, j, leadingOne;
         /**ALGORITMA */
         eselon = true;
+        leadingOne = -1;
+        i = M.FirsIdxBrs;
+        while (eselon && i<=M.LastIdxBrs){
+            foundLone = false;
+            j = M.LastIdxKol;
+            while (eselon && i<=M.LastIdxKol && !foundLone){
+                if (M.isi[i][j]==0){
+                    j++;
+                }
+                else if (M.isi[i][j] == 1){
+                    if (j>leadingOne){
+                        leadingOne = j;
+                        foundLone = true;
+                    }
+                    else{
+                        eselon = false;
+                    }
+                }
+                else{
+                    eselon = false;
+                }
+
+            }
+            if (eselon){
+                i++;
+            }
+        }
         return eselon;
+
+    }
+
+    public static void MakeEselon(Matriks M){ //Mengubah matriks M menjadi matriks eselon dengan OBE
+        /**KAMUS LOKAL */
+        int k, i, n, max;
+        float pengali;
+        /**ALGORITMA */
+        if(!IsEselon(M)){
+            n = M.KolEff;
+            for (k=0;k<n;k++){
+                max = k;
+                for (i=k+1;i<n;i++){
+                    if (Math.abs(M.isi[i][k])>(Math.abs(M.isi[max][k]))){
+                        max = i;
+                    }
+                }
+                Matriks.TukarBrs(M, max, k);
+
+                for (i=k+1;i<n;i++){
+                    pengali = M.isi[i][k] / M.isi[k][k];
+                    Matriks.TambahBrs(M, i, k, (pengali*-1));
+                }                
+            }
+
+        }
 
     }
 

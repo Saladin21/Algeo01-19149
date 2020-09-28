@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SPL",
+            "request": "launch",
+            "mainClass": "SPL",
+            "projectName": "Algeo01-19149_9dfd172e"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Matriks",
             "request": "launch",
             "mainClass": "Matriks",
