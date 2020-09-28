@@ -309,6 +309,66 @@ public class Matriks {
         return matriksInverse;
     }
 
+    public static float DeterminanReduksiBaris(Matriks M){
+        /**KAMUS LOKAL */
+        float det, bagi;
+        int i, j, k, l, p, q;
+        int idxfb0, tuker, tanda;
+        boolean bukan0;
+        /**ALGORITMA */
+        if (Matriks.IsSegitigaAtas(M) || Matriks.IsSegitigaBawah(M)){
+            det = M.isi[0][0];
+            for (i=M.FirstIdxKol+1; i<=M.LastIdxBrs; i++){
+                det *= M.isi[i][i];
+            }
+            return det;
+        } else{
+            j = 0;
+            tuker = 0;
+            while (j<=M.LastIdxKol){
+                k = j;
+                bukan0 = false;
+                while(k<=M.LastIdxBrs && bukan0==false){
+                    if (M.isi[k][j] != 0){
+                        bukan0 = true;
+                    } else{
+                        k++;
+                    }
+                }
+                if (bukan0 == false){
+                    det = 0;
+                    return det;
+                } else{
+                    idxfb0 = k;
+                    if (idxfb0 > j){
+                        Matriks.TukarBrs(M, idxfb0, j);
+                        tuker ++;
+                    }
+                    l = j+1;
+                    while (l<=M.LastIdxKol){
+                        if (M.isi[l][j] != 0){
+                            bagi = (M.isi[l][j] / M.isi[j][j]) * -1;
+                            Matriks.TambahBrs(M, l, j, bagi);
+                        }
+                        l++;
+                    }
+                }
+                j++;
+            }
+            det = M.isi[0][0];
+            q = 0;
+            tanda = -1;
+            while (q <= tuker){
+                tanda *= -1;
+                q++;
+            }
+            for (p = 1; p<=M.LastIdxKol; p++){
+                det *= M.isi[p][p];
+            }
+            return det*tanda;
+        }
+    }
+
     public static void main(String[] args) {
         Matriks M = new Matriks();
         Matriks.BacaKeyboard(M);
@@ -320,11 +380,17 @@ public class Matriks {
         float determinan = Matriks.DeterminanKofaktor(M);
         System.out.printf("%.2f", determinan);
         System.out.print("\n");
+        Matriks.TulisLayar(M);
+        System.out.print("\n");
         Matriks.TulisLayar(Matriks.buangBrKolMatriks(M, 0, 0));
         System.out.print("\n");
         Matriks.TulisLayar(Matriks.matriksKofaktor(M));
         System.out.print("\n");
         Matriks.TulisLayar(Matriks.inverseMatriks(M));
+        System.out.print("\n");
+        float determinanbrs = Matriks.DeterminanReduksiBaris(M);
+        System.out.printf("Determinan menggunakan reduksi baris: %.2f \n", determinanbrs);
+        System.out.print("\n");
     }
 
 }
