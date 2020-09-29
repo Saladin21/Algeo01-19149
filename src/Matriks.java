@@ -12,12 +12,12 @@ public class Matriks {
     int LastIdxKol;
     int NbElmt;
 
-    public static void MakeEmpty(Matriks M, int nb, int nk) { //Membuat matriks dengan ukuran nb x nk
+    public static void MakeEmpty(Matriks M, int nb, int nk) { //Membuat matriks dengan ukuran nb x nk    
         M.BrsEff = nb;
         M.KolEff = nk;
         M.NbElmt = M.BrsEff * M.KolEff;
         M.LastIdxBrs = M.BrsEff - 1 + M.FirsIdxBrs;
-        M.LastIdxKol = M.KolEff -1 + M.FirstIdxKol;        
+        M.LastIdxKol = M.KolEff -1 + M.FirstIdxKol; 
     }
 
     public static void BacaKeyboard(Matriks M){
@@ -43,15 +43,7 @@ public class Matriks {
     }
 
     public static void BacaFile(Matriks M){
-        /**KAMUS LOKAL */
-        Scanner baca = new Scanner(System.in);
-        String namaFile;
-        /**ALGORITMA */
-        System.out.print("Masukkan nama file yang akan dibaca: ");
-        namaFile = baca.nextLine();
 
-
-        baca.close();
     }
 
     public static void TulisLayar (Matriks M){
@@ -89,6 +81,23 @@ public class Matriks {
             }
         }
     }
+
+public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
+	/*KAMUS LOKAL*/
+	int i, j, k;
+	float elemen;
+	/*ALGORITMA*/
+    Matriks.MakeEmpty(MHsl, M1.BrsEff, M2.KolEff);
+	for (i=MHsl.FirsIdxBrs;i<=MHsl.LastIdxBrs;i++){
+		for(j=MHsl.FirstIdxKol;j<=MHsl.LastIdxKol;j++){
+			elemen = 0;
+			for(k=M1.FirstIdxKol;k<=M2.LastIdxBrs;k++){
+				elemen += M1.isi[i][k] * M2.isi[k][j];
+			}
+			MHsl.isi[i][j] = elemen;
+		}
+	}
+}
 
 
     public static boolean IsSegitigaAtas(Matriks M){ //Mengecek apakah Matriks M matriks segitiga atas
@@ -188,10 +197,13 @@ public class Matriks {
 
     public static void MakeEselon(Matriks M){ //Mengubah matriks M menjadi matriks eselon dengan OBE
         /**KAMUS LOKAL */
-        int k, i, n, max;
+        int k, i, j, n, max;
+        float lead;
         float pengali;
         /**ALGORITMA */
         if(!IsEselon(M)){
+            M.BrsEff = M.KolEff -1;
+            M.LastIdxBrs = M.BrsEff -1;
             n = M.KolEff;
             for (k=0;k<n;k++){
                 max = k;
@@ -206,6 +218,24 @@ public class Matriks {
                     pengali = M.isi[i][k] / M.isi[k][k];
                     Matriks.TambahBrs(M, i, k, (pengali*-1));
                 }                
+            }
+
+            i = M.FirsIdxBrs;
+            while (i<=M.LastIdxBrs){
+                j = M.FirstIdxKol;
+                lead = 0;
+                while (lead==0 && j<=M.LastIdxKol){
+                    if (M.isi[i][j]!=0){
+                        lead = M.isi[i][j];
+                    }
+                    else{
+                        j++;
+                    }
+                }
+                if(lead != 0){
+                    Matriks.KaliBrs(M, i, (1/lead));
+                }
+                i++;
             }
 
         }
@@ -255,6 +285,22 @@ public class Matriks {
         for (j=M.FirstIdxKol; j<=M.LastIdxKol ; j++){
             M.isi[r1][j] += M.isi[r2][j]*x;
         }
+    }
+
+    public static boolean AllZero(Matriks M, int i){
+        int j;
+        boolean allzero = true;
+        
+        j = M.FirstIdxKol;
+        while (allzero && j<=M.LastIdxKol){
+            if (M.isi[i][j] != 0){
+                allzero = false;
+            }
+            else{
+                j++;
+            }
+        }
+        return allzero;
     }
 
     //Asumsi Matriks berukuran nxn atau NeffBrs == NeffKol
