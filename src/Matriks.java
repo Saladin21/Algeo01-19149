@@ -242,6 +242,14 @@ public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
 
     }
 
+    public static void MakeReducedEselon(Matriks M){
+        /**KAMUS LOKAL */
+        int i, j, k;
+        /**ALGORITMA */
+        Matriks.MakeEselon(M);
+
+    }
+
     /*OBE*/
     public static void transposeMatriks(Matriks M){
         /**KAMUS LOKAL */
