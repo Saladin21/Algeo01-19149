@@ -35,7 +35,7 @@ public class Matriks {
 
         for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
             for (j=M.FirstIdxKol; j<=M.LastIdxKol;j++){
-                elemen = baca.nextInt();
+                elemen = baca.nextFloat();
                 M.isi[i][j] = elemen;
             }
         }
@@ -257,7 +257,7 @@ public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
         float temp;
         /**ALGORITMA */
         for (i=M.FirsIdxBrs; i<=M.LastIdxBrs; i++){
-            for (j=M.FirstIdxKol; j<=M.LastIdxKol; j++){
+            for (j=M.FirstIdxKol; j<i; j++){
                 temp = M.isi[i][j];
                 M.isi[i][j] = M.isi[j][i];
                 M.isi[j][i] = temp;
