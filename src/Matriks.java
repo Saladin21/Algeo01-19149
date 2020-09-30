@@ -245,9 +245,52 @@ public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
 
     public static void MakeReducedEselon(Matriks M){
         /**KAMUS LOKAL */
-        int i, j, k;
+        int k, i, j, n, max;
+        float lead;
+        float pengali;
         /**ALGORITMA */
-        Matriks.MakeEselon(M);
+        if(!IsEselon(M)){
+            if (M.BrsEff<M.KolEff-1){
+            M.BrsEff = M.KolEff -1;
+            M.LastIdxBrs = M.BrsEff -1;
+            }
+            n = M.KolEff-1;
+            for (k=0;k<n;k++){
+                max = k;
+                for (i=k+1;i<=M.LastIdxBrs;i++){
+                    if (Math.abs(M.isi[i][k])>(Math.abs(M.isi[max][k]))){
+                        max = i;
+                    }
+                }
+                Matriks.TukarBrs(M, max, k);
+
+                for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
+                    if(i != k){
+                        pengali = M.isi[i][k] / M.isi[k][k];
+                        Matriks.TambahBrs(M, i, k, (pengali*-1));
+                    }
+                }                
+            }
+
+            i = M.FirsIdxBrs;
+            while (i<=M.LastIdxBrs){
+                j = M.FirstIdxKol;
+                lead = 0;
+                while (lead==0 && j<=M.LastIdxKol){
+                    if (M.isi[i][j]!=0){
+                        lead = M.isi[i][j];
+                    }
+                    else{
+                        j++;
+                    }
+                }
+                if(lead != 0){
+                    Matriks.KaliBrs(M, i, (1/lead));
+                }
+                i++;
+            } 
+
+        }
 
     }
 

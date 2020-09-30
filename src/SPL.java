@@ -91,6 +91,7 @@ public class SPL {
             if (Matriks.AllZero(A, i)){
                 if (M.isi[i][M.LastIdxKol]==0){
                     kategori = 2;
+                    i++;
                 }
                 else{
                     kategori = 3;
@@ -115,11 +116,43 @@ public class SPL {
     }
 
     public static int GaussJordan (Matriks M, Matriks Mhsl){
+        //kategori: 1. solusi tunggal, 2. banyak solusi, 3. tidak ada solusi
         /**KAMUS LOKAL */
-        int kategori = 1;
-
+        int i, j, kategori;
+        Matriks A = new Matriks();
         /**ALGORITMA */
+        Matriks.MakeReducedEselon(M);
+        Matriks.MakeEmpty(Mhsl, 1, M.KolEff-1);
+        Matriks.MakeEmpty(A, M.BrsEff, M.KolEff-1);
 
+        for (i=A.FirsIdxBrs;i<=A.LastIdxBrs;i++){
+            for (j=A.FirstIdxKol;j<=A.LastIdxKol;j++){
+                A.isi[i][j] = M.isi[i][j];
+            }
+        }
+
+        kategori = 1;
+        i = A.FirsIdxBrs;
+        while ((kategori !=3) && i<=A.LastIdxBrs){
+            if (Matriks.AllZero(A, i)){
+                if (M.isi[i][M.LastIdxKol]==0){
+                    kategori = 2;
+                    i++;
+                }
+                else{
+                    kategori = 3;
+                }
+            }
+            else{
+                i++;
+            }
+        }
+        if (kategori == 1 || (kategori == 2 && M.BrsEff>M.KolEff-1)){ 
+            for (i=M.LastIdxKol-1;i>=0;i--){
+                Mhsl.isi[0][i] = M.isi[i][M.LastIdxKol];
+            }
+            kategori = 1;
+        }
         return kategori;
     }
 
