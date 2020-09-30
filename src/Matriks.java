@@ -35,7 +35,7 @@ public class Matriks {
 
         for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
             for (j=M.FirstIdxKol; j<=M.LastIdxKol;j++){
-                elemen = baca.nextInt();
+                elemen = baca.nextFloat();
                 M.isi[i][j] = elemen;
             }
         }
@@ -459,7 +459,7 @@ public class Matriks {
         //KAMUS LOKAL
         Matriks M = new Matriks();
         //ALGORITMA
-        MakeEmpty(M, M1.BrsEff, i);
+        MakeEmpty(M, M1.BrsEff, 1);
         for(int i=0; i<M1.BrsEff; i++){
             M.isi[i][0] = M1.isi[i][j1]*M2.isi[i][j2];
         }
