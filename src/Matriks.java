@@ -39,7 +39,6 @@ public class Matriks {
                 M.isi[i][j] = elemen;
             }
         }
-        baca.close();
     }
 
     public static void BacaFile(Matriks M){
@@ -188,25 +187,100 @@ public class Matriks {
 
     public static void MakeEselon(Matriks M){ //Mengubah matriks M menjadi matriks eselon dengan OBE
         /**KAMUS LOKAL */
-        int k, i, n, max;
+        int k, i, j, n, max;
+        float lead;
         float pengali;
         /**ALGORITMA */
         if(!IsEselon(M)){
-            n = M.KolEff;
+            if (M.BrsEff<M.KolEff-1){
+            M.BrsEff = M.KolEff -1;
+            M.LastIdxBrs = M.BrsEff -1;
+            }
+            n = M.KolEff-1;
             for (k=0;k<n;k++){
                 max = k;
-                for (i=k+1;i<n;i++){
+                for (i=k+1;i<=M.LastIdxBrs;i++){
                     if (Math.abs(M.isi[i][k])>(Math.abs(M.isi[max][k]))){
                         max = i;
                     }
                 }
                 Matriks.TukarBrs(M, max, k);
 
-                for (i=k+1;i<n;i++){
+                for (i=k+1;i<=M.LastIdxBrs;i++){
                     pengali = M.isi[i][k] / M.isi[k][k];
                     Matriks.TambahBrs(M, i, k, (pengali*-1));
                 }                
             }
+
+            i = M.FirsIdxBrs;
+            while (i<=M.LastIdxBrs){
+                j = M.FirstIdxKol;
+                lead = 0;
+                while (lead==0 && j<=M.LastIdxKol){
+                    if (M.isi[i][j]!=0){
+                        lead = M.isi[i][j];
+                    }
+                    else{
+                        j++;
+                    }
+                }
+                if(lead != 0){
+                    Matriks.KaliBrs(M, i, (1/lead));
+                }
+                i++;
+            } 
+
+        }
+
+    }
+
+
+    public static void MakeReducedEselon(Matriks M){
+        /**KAMUS LOKAL */
+        int k, i, j, n, max;
+        float lead;
+        float pengali;
+        /**ALGORITMA */
+        if(!IsEselon(M)){
+            if (M.BrsEff<M.KolEff-1){
+            M.BrsEff = M.KolEff -1;
+            M.LastIdxBrs = M.BrsEff -1;
+            }
+            n = M.KolEff-1;
+            for (k=0;k<n;k++){
+                max = k;
+                for (i=k+1;i<=M.LastIdxBrs;i++){
+                    if (Math.abs(M.isi[i][k])>(Math.abs(M.isi[max][k]))){
+                        max = i;
+                    }
+                }
+                Matriks.TukarBrs(M, max, k);
+
+                for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
+                    if(i != k){
+                        pengali = M.isi[i][k] / M.isi[k][k];
+                        Matriks.TambahBrs(M, i, k, (pengali*-1));
+                    }
+                }                
+            }
+
+            i = M.FirsIdxBrs;
+            while (i<=M.LastIdxBrs){
+                j = M.FirstIdxKol;
+                lead = 0;
+                while (lead==0 && j<=M.LastIdxKol){
+                    if (M.isi[i][j]!=0){
+                        lead = M.isi[i][j];
+                    }
+                    else{
+                        j++;
+                    }
+                }
+                if(lead != 0){
+                    Matriks.KaliBrs(M, i, (1/lead));
+                }
+                i++;
+            } 
 
         }
 
@@ -219,7 +293,7 @@ public class Matriks {
         float temp;
         /**ALGORITMA */
         for (i=M.FirsIdxBrs; i<=M.LastIdxBrs; i++){
-            for (j=M.FirstIdxKol; j<=M.LastIdxKol; j++){
+            for (j=M.FirstIdxKol; j<i; j++){
                 temp = M.isi[i][j];
                 M.isi[i][j] = M.isi[j][i];
                 M.isi[j][i] = temp;
