@@ -286,6 +286,39 @@ public class Matriks {
 
     }
 
+    public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
+        /*KAMUS LOKAL*/
+        int i, j, k;
+        float elemen;
+        /*ALGORITMA*/
+        Matriks.MakeEmpty(MHsl, M1.BrsEff, M2.KolEff);
+        for (i=MHsl.FirsIdxBrs;i<=MHsl.LastIdxBrs;i++){
+            for(j=MHsl.FirstIdxKol;j<=MHsl.LastIdxKol;j++){
+                elemen = 0;
+                for(k=M1.FirstIdxKol;k<=M2.LastIdxBrs;k++){
+                    elemen += M1.isi[i][k] * M2.isi[k][j];
+                }
+                MHsl.isi[i][j] = elemen;
+            }
+        }
+    }
+
+    public static boolean AllZero(Matriks M, int i){
+        int j;
+        boolean allzero = true;
+        
+        j = M.FirstIdxKol;
+        while (allzero && j<=M.LastIdxKol){
+            if (M.isi[i][j] != 0){
+                allzero = false;
+            }
+            else{
+                j++;
+            }
+        }
+        return allzero;
+    }
+
     /*OBE*/
     public static void transposeMatriks(Matriks M){
         /**KAMUS LOKAL */
