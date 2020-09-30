@@ -1,5 +1,5 @@
 import java.util.Scanner;
-//import java.io.*;
+import java.io.*;
 
 public class Regresi{
     public static void inputUser(Matriks x, Matriks y, Matriks X){
@@ -13,7 +13,7 @@ public class Regresi{
         Matriks.MakeEmpty(y, n, 1);
         Matriks.MakeEmpty(X, 1, k);
         for(int i = 0; i<n; i++){
-            for(int j = 0; j<k; i++){
+            for(int j = 0; j<k; j++){
                 x.isi[i][j] = baca.nextFloat();
             }
             y.isi[i][0] = baca.nextFloat();
@@ -23,8 +23,8 @@ public class Regresi{
         }
         baca.close();
     }
-/*
-    public static void inputFile(Matriks x, Matriks y, Matriks X, String file){
+
+    public static void inputFile(Matriks x, Matriks y, Matriks X, String file) throws FileNotFoundException{
         //KAMUS LOKAL
         FileInputStream data = new FileInputStream(file);
         Scanner baca = new Scanner(data);
@@ -36,7 +36,7 @@ public class Regresi{
         Matriks.MakeEmpty(y, n, 1);
         Matriks.MakeEmpty(X, 1, k);
         for(int i = 0; i<n; i++){
-            for(int j = 0; j<k; i++){
+            for(int j = 0; j<k; j++){
                 x.isi[i][j] = baca.nextFloat();
             }
             y.isi[i][0] = baca.nextFloat();
@@ -46,7 +46,7 @@ public class Regresi{
         }
         baca.close();
     }
-*/
+
     public static void regresi(Matriks x, Matriks y, Matriks X, Float[] Y){
         //KAMUS LOKAL
         Matriks M = new Matriks();
@@ -79,5 +79,15 @@ public class Regresi{
 
     public static void output(Float[] Y){
         System.out.print(Y[0]);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        // KAMUS
+        Matriks x = new Matriks(), y = new Matriks(), X = new Matriks();
+        Float[] Y = new Float[]{0f};
+        //ALGORITMA
+        inputFile(x, y, X, "Studi Kasus 8 titik.txt");
+        regresi(x, y, X, Y);
+        output(Y);
     }
 }

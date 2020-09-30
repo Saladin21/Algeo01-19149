@@ -1,4 +1,4 @@
-//import java.io.FileInputStream;
+import java.io.*;
 import java.util.Scanner;
 
 public class Interpolar{
@@ -20,8 +20,8 @@ public class Interpolar{
         baca.close();
 
     }
-/*
-    public static void inputFile(final Matriks x, final Matriks y, Float X, final String file) {
+
+    public static void inputFile(final Matriks x, final Matriks y, Float X, final String file) throws FileNotFoundException {
         // KAMUS LOKAL
         FileInputStream data = new FileInputStream(file);
         Scanner baca = new Scanner(data);
@@ -39,7 +39,7 @@ public class Interpolar{
         baca.close();
 
     }
-*/
+
     public static void interpolar(Matriks x, Matriks y, Float[] X, Float[] Y) {
         // KAMUS LOKAL
         Matriks M = new Matriks();
@@ -69,7 +69,7 @@ public class Interpolar{
         System.out.print(Y[0]);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // KAMUS
         Matriks x = new Matriks(), y = new Matriks();
         Float[] X = new Float[]{0f}, Y = new Float[]{0f};
