@@ -6,17 +6,21 @@ public class Regresi{
         //KAMUS LOKAL
         int k, n;
         //ALGORITMA
+        System.out.print("Masukkan banyak variabel x: ");
         k = Menu.baca.nextInt();
+        System.out.print("Masukkan banyak titik: ");
         n = Menu.baca.nextInt();
         Matriks.MakeEmpty(x, n, k);
         Matriks.MakeEmpty(y, n, 1);
         Matriks.MakeEmpty(X, 1, k);
         for(int i = 0; i<n; i++){
+            System.out.print("Masukkan nilai titik ke-"+(i+1)+": ");
             for(int j = 0; j<k; j++){
                 x.isi[i][j] = Menu.baca.nextFloat();
             }
             y.isi[i][0] = Menu.baca.nextFloat();
         }
+        System.out.print("Masukkan nilai X dari titik yang akan di taksir: ");
         for(int i = 0; i<k; i++){
             X.isi[0][i] = Menu.baca.nextFloat();
         }
@@ -77,7 +81,7 @@ public class Regresi{
     }
 
     public static void output(Float[] Y){
-        System.out.print(Y[0]);
+        System.out.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
     }
 /*
     public static void main(String[] args) throws FileNotFoundException {
