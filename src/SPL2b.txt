@@ -1,0 +1,5 @@
+Solusi SPL adalah: 
+X1 = 0.00
+X2 = 2.00 
+X3 = 1.00 
+X4 = 1.00 

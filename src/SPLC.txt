@@ -1,0 +1,7 @@
+Solusi SPL adalah: 
+X1 = 2.00  X2  X5 
+X2 = 1.00  X6 
+X3 = -1.00  X4  X5 
+X4 =  X4 
+X5 =  X5 
+X6 =  X6 

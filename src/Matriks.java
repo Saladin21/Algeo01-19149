@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Matriks {
-    int BrsMax = 99;
-    int KolMax = 99;
+    int BrsMax = 199;
+    int KolMax = 199;
     float[][] isi = new float[BrsMax+1][KolMax+1];
     int BrsEff = 0;
     int KolEff = 0;
@@ -218,7 +218,6 @@ public class Matriks {
         float lead;
         float pengali;
         /**ALGORITMA */
-        if(!IsEselon(M)){
             if (M.BrsEff<M.KolEff-1){
             M.BrsEff = M.KolEff -1;
             M.LastIdxBrs = M.BrsEff -1;
@@ -259,7 +258,7 @@ public class Matriks {
                 i++;
             } 
 
-        }
+        
 
     }
 
@@ -270,7 +269,6 @@ public class Matriks {
         float lead;
         float pengali;
         /**ALGORITMA */
-        if(!IsEselon(M)){
             if (M.BrsEff<M.KolEff-1){
             M.BrsEff = M.KolEff -1;
             M.LastIdxBrs = M.BrsEff -1;
@@ -311,7 +309,7 @@ public class Matriks {
                 i++;
             } 
 
-        }
+        
 
     }
 
