@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Regresi{
-    public static void inputUser(Matriks x, Matriks y, Matriks X) throws FileNotFoundException{
+    public static void inputUser(Matriks x, Matriks y, Matriks X) {
         //KAMUS LOKAL
         int k, n;
         //ALGORITMA
@@ -50,10 +50,9 @@ public class Regresi{
         baca.close();
     }
 
-    public static void regresi(Matriks x, Matriks y, Matriks X, Float[] Y){
+    public static void regresi(Matriks x, Matriks y, Matriks M1, Matriks X){
         //KAMUS LOKAL
         Matriks M = new Matriks();
-        Matriks M1 = new Matriks();
         int i, j;
         //ALGORITMA
         Matriks.MakeEmpty(M, x.KolEff+1, x.KolEff+2);
@@ -73,14 +72,19 @@ public class Regresi{
         }
 
         SPL.Cramer(M, M1);
-
-        Y[0] = 0f;
-        for (j = 0; j < M.KolEff; j++) {
-            Y[0] += M1.isi[0][j]*X.isi[0][j];
-        }
     }
 
-    public static void output(Float[] Y){
+    public static void output(Matriks M, Matriks X, Float[] Y){
+        // KAMUS LOKAL
+        int j;
+        //ALGORITMA
+        System.out.print("persamaan polinom yang terbentuk: y = ");
+        Y[0] = 0f;
+        for (j = 0; j < M.KolEff; j++) {
+            System.out.printf("%.2fx%d", M.isi[0][j], j+1);
+            Y[0] += M.isi[0][j]*X.isi[0][j];
+        }
+        System.out.print("\n");
         System.out.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
     }
 /*

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Matriks {
     int BrsMax = 99;
@@ -65,10 +66,26 @@ public class Matriks {
         }
     }
 
-    public static void TulisFile (Matriks M){
+    public static void TulisFile (Matriks M, String NamaFile){
         /**KAMUS LOKAL */
-
+        PrintWriter file;
+        int i, j;
         /**ALGORITMA */
+        try {
+            file = new PrintWriter(NamaFile);
+            for(i = 0; i < M.BrsEff; i++){
+                for(j=0; j<M.KolEff; j++){
+                    file.print(M.isi[i][j] + " ");
+                }
+                file.print("\n");
+            }
+            file.close();
+            System.out.println("Hasil berhasil disimpan di " + NamaFile);
+        } 
+          catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public static void CopyMatriks(Matriks M1, Matriks M2){ //Menyalin elemen M ke M2
@@ -378,8 +395,6 @@ public class Matriks {
         /**ALGORITMA */
         if(M.NbElmt == 4){
             return ((M.isi[0][0] * M.isi[1][1]) - (M.isi[0][1] * M.isi[1][0]));
-        } else if(M.NbElmt == 1){
-            return M.isi[0][0];
         } else{
             sign = 1;
             det = 0;
@@ -448,9 +463,6 @@ public class Matriks {
                     Mkof.isi[i][j] = 0;
                 }
                 sign *= -1;
-                if (M.KolEff % 2 == 0 && j == M.LastIdxKol){
-                    sign *= -1;
-                }
             }
         }
         return Mkof;
@@ -578,120 +590,6 @@ public class Matriks {
             M.isi[i][0] = M1.isi[i][j1]*M2.isi[i][j2];
         }
         return M;
-    }
-
-    public static void MenuDeterminan(){
-        int menuInput, metodeInput;
-        Matriks M = new Matriks();
-        do{
-            System.out.println("Pilih input: ");
-            System.out.println("1. Input dari keyboard");
-            System.out.println("2. Input dari file");
-            System.out.print("Silahkan masukkan input: ");
-            menuInput = Menu.baca.nextInt();
-            System.out.print("\n");
-        } while (menuInput<1 && menuInput>2);
-        if (menuInput == 1){
-            Matriks.BacaKeyboard(M);
-        } else{
-            Matriks.BacaFIle(M);
-        }
-        do{
-            System.out.println("Pilih input: ");
-            System.out.println("1. Metode Ekspansi Kofaktor");
-            System.out.println("2. Metode Reduksi Baris");
-            System.out.print("Silahkan pilih metode: ");
-            metodeInput = Menu.baca.nextInt();
-            System.out.print("\n");
-        } while(metodeInput<1 && metodeInput>2);
-        if (metodeInput == 1){
-            float determinan;
-            if(M.BrsEff == M.KolEff){
-                determinan = Matriks.DeterminanKofaktor(M);
-                System.out.printf("Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah %.2f\n", determinan);
-            } else{
-                System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
-            }
-        } else{
-            float determinan;
-            if(M.BrsEff == M.KolEff){
-                if (M.NbElmt == 1){
-                    determinan = M.isi[0][0];
-                    System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n", determinan);
-                } else{
-                    determinan = Matriks.DeterminanReduksiBaris(M);
-                    System.out.println("Setelah dilakukan reduksi baris pada matriks, maka matriks tersebut menjadi");
-                    Matriks.TulisLayar(M);
-                    System.out.print("\n");
-                    System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n", determinan);
-                }
-            } else{
-                System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
-            }
-
-        }
-    }
-
-    public static void MenuInverse(){
-        int menuInput, metodeInput;
-        Matriks M = new Matriks();
-        do{
-            System.out.println("Pilih input: ");
-            System.out.println("1. Input dari keyboard");
-            System.out.println("2. Input dari file");
-            System.out.print("Silahkan masukkan input: ");
-            menuInput = Menu.baca.nextInt();
-            System.out.print("\n");
-        } while (menuInput<1 && menuInput>2);
-        if (menuInput == 1){
-            Matriks.BacaKeyboard(M);
-        } else{
-            Matriks.BacaFIle(M);
-        }
-        if (M.BrsEff == M.KolEff){
-            float determinan;
-            if(M.NbElmt == 1){
-                if (M.isi[0][0] != 0){
-                    M.isi[0][0] = 1 / M.isi[0][0];
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
-                    TulisLayar(M);
-                    System.out.print("\n");
-                } else{
-                    System.out.println("Matriks tersebut tidak memiliki invers");
-                }
-            } else if (M.NbElmt == 4){
-                if (Matriks.DeterminanKofaktor(M) != 0){
-                    determinan = Matriks.DeterminanKofaktor(M);
-                    float temp = M.isi[0][0];
-                    M.isi[0][0] = M.isi[1][1];
-                    M.isi[1][1] = temp;
-                    M.isi[1][0] *= -1;
-                    M.isi[0][1] *= -1;
-                    for (int i = M.FirsIdxBrs; i<=M.LastIdxBrs;i++){
-                        for (int j = M.FirstIdxKol; j<=M.LastIdxKol; j++){
-                            M.isi[i][j] *= 1 / determinan;
-                        }
-                    }
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
-                    TulisLayar(M);
-                    System.out.print("\n");
-                } else{
-                    System.out.println("Matriks tersebut tidak memiliki invers");
-                }
-            } else{
-                Matriks invers = new Matriks();
-                if (Matriks.DeterminanKofaktor(M) != 0){
-                    invers = Matriks.inverseMatriks(M);
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
-                    TulisLayar(invers);
-                    System.out.print("\n");
-                } else{
-                    System.out.println("Matriks tersebut tidak memiliki invers");
-                }
-            }
-        } else{
-            System.out.println("Matriks tersebut tidak memiliki invers");
-        }
     }
 
     public static void main(String[] args) {

@@ -38,9 +38,8 @@ public class Interpolar{
 
     }
 
-    public static void interpolar(Matriks x, Matriks y, Float[] X, Float[] Y) {
+    public static void interpolar(Matriks x, Matriks y, Matriks M, Float[] X, Float[] Y) {
         // KAMUS LOKAL
-        Matriks M = new Matriks();
         Matriks Mtemp = new Matriks();
         float Xtemp = 1f;
         int i, j;
@@ -62,7 +61,24 @@ public class Interpolar{
 
     }
 
-    public static void output(Float[] X, Float[] Y) {
+    public static void output(Matriks M, Float[] X, Float[] Y) {
+        // KAMUS LOKAL
+        float Xtemp = 1f;
+        int j;
+        //ALGORITMA
+        System.out.print("persamaan polinom yang terbentuk: y = ");
+        Y[0] = 0f;
+        for (j = 0; j < M.KolEff; j++) {
+            if(j==0){
+                System.out.printf("%.2f", M.isi[0][j]);
+            }
+            else{
+                System.out.printf(" + %.2fx^%d", M.isi[0][j], j);
+            }
+            Y[0] += M.isi[0][j] * Xtemp;
+            Xtemp *= X[0];
+        }
+        System.out.print("\n");
         System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n");
     }
 /*
