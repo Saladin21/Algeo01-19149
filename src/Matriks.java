@@ -42,16 +42,47 @@ public class Matriks {
         }
     }
 
-    public static void BacaFile(Matriks M){
-        /**KAMUS LOKAL */
-        Scanner baca = new Scanner(System.in);
+    public static void BacaFile(Matriks M) throws IOException{
+        Scanner inputKey = new Scanner(System.in);
         String namaFile;
-        /**ALGORITMA */
-        System.out.print("Masukkan nama file yang akan dibaca: ");
-        namaFile = baca.nextLine();
+        //namaFile = inputKey.next();
+        File file = null;
+        System.out.print("Masukkan nama file: ");
+        namaFile = inputKey.next();
+        file = new File(namaFile);
+        while(!(file.exists())){
+            System.out.print("Masukkan nama file: ");
+            namaFile = inputKey.next();
+            file = new File(namaFile);
+        }
+        FileReader fileInput = new FileReader(namaFile);
+        BufferedReader bufferedReader = new BufferedReader(fileInput);
+        String data = bufferedReader.readLine();
+        
+        int baris;
+        baris = 0;
+        int lkol = 0;
+        while (data != null){
+            Scanner in = new Scanner(data);
+            //int kolom = 0;
+            lkol = 0;
+            while (in.hasNextLine()){
+                M.isi[baris][lkol] = in.nextFloat();
+                //System.out.print(in.nextFloat() + " ");
+                lkol++;
+            }
+            //System.out.print("\n");
+            baris++;
+            //lkol += kolom;
+            data = bufferedReader.readLine();
+        }
+        M.BrsEff = baris;
+        M.KolEff = lkol;
+        M.NbElmt = M.BrsEff * M.KolEff;
+        M.LastIdxBrs = M.BrsEff - 1 + M.FirsIdxBrs;
+        M.LastIdxKol = M.KolEff -1 + M.FirstIdxKol;  
+        
 
-
-        baca.close();
     }
 
     public static void TulisLayar (Matriks M){
@@ -66,26 +97,10 @@ public class Matriks {
         }
     }
 
-    public static void TulisFile (Matriks M, String NamaFile){
+    public static void TulisFile (Matriks M){
         /**KAMUS LOKAL */
-        PrintWriter file;
-        int i, j;
+
         /**ALGORITMA */
-        try {
-            file = new PrintWriter(NamaFile);
-            for(i = 0; i < M.BrsEff; i++){
-                for(j=0; j<M.KolEff; j++){
-                    file.print(M.isi[i][j] + " ");
-                }
-                file.print("\n");
-            }
-            file.close();
-            System.out.println("Hasil berhasil disimpan di " + NamaFile);
-        } 
-          catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
     }
 
     public static void CopyMatriks(Matriks M1, Matriks M2){ //Menyalin elemen M ke M2
@@ -276,7 +291,7 @@ public class Matriks {
                 Matriks.TukarBrs(M, max, k);
 
                 for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
-                    if(i != k){
+                    if(i != k && M.isi[k][k]!=0){
                         pengali = M.isi[i][k] / M.isi[k][k];
                         Matriks.TambahBrs(M, i, k, (pengali*-1));
                     }
