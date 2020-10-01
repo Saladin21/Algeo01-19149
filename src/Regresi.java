@@ -79,10 +79,11 @@ public class Regresi{
         int j;
         //ALGORITMA
         System.out.print("persamaan polinom yang terbentuk: y = ");
-        Y[0] = 0f;
-        for (j = 0; j < M.KolEff; j++) {
-            System.out.printf("%.2fx%d", M.isi[0][j], j+1);
-            Y[0] += M.isi[0][j]*X.isi[0][j];
+        System.out.printf("%.2fx%d", M.isi[0][0], 1);
+        Y[0] = M.isi[0][0]*X.isi[0][0];
+        for (j = 1; j < M.BrsEff; j++) {
+            System.out.printf(" + %.2fx%d", M.isi[j][0], j+1);
+            Y[0] += M.isi[j][0]*X.isi[0][j];
         }
         System.out.print("\n");
         System.out.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
@@ -90,24 +91,31 @@ public class Regresi{
 
     public static void outputFile(Matriks M, Matriks X, Float[] Y, String File) {
         // KAMUS LOKAL
-        float Xtemp = 1f;
         int j;
         PrintWriter file;
         //ALGORITMA
         try{
             file = new PrintWriter(File);
+
             System.out.print("persamaan polinom yang terbentuk: y = ");
             file.print("persamaan polinom yang terbentuk: y = ");
-            Y[0] = 0f;
-            for (j = 0; j < M.KolEff; j++) {
-                System.out.printf("%.2fx%d", M.isi[0][j], j+1);
-                file.printf("%.2fx%d", M.isi[0][j], j+1);
-                Y[0] += M.isi[0][j]*X.isi[0][j];
+
+            System.out.printf("%.2fx%d", M.isi[0][0], 1);
+            file.printf("%.2fx%d", M.isi[0][0], 1);
+
+            Y[0] = M.isi[0][0]*X.isi[0][0];
+            for (j = 1; j < M.BrsEff; j++) {
+                System.out.printf(" + %.2fx%d", M.isi[j][0], j+1);
+                file.printf(" + %.2fx%d", M.isi[j][0], j+1);
+
+                Y[0] += M.isi[j][0]*X.isi[0][j];
             }
             System.out.print("\n");
             file.print("\n");
+
             System.out.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
             file.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
+
             file.close();
         }
         catch(IOException e) {

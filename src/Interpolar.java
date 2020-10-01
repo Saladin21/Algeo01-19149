@@ -68,14 +68,14 @@ public class Interpolar{
         //ALGORITMA
         System.out.print("persamaan polinom yang terbentuk: y = ");
         Y[0] = 0f;
-        for (j = 0; j < M.KolEff; j++) {
+        for (j = 0; j < M.BrsEff; j++) {
             if(j==0){
-                System.out.printf("%.2f", M.isi[0][j]);
+                System.out.printf("%.2f", M.isi[j][0]);
             }
             else{
-                System.out.printf(" + %.2fx^%d", M.isi[0][j], j);
+                System.out.printf(" + %.2fx^%d", M.isi[j][0], j);
             }
-            Y[0] += M.isi[0][j] * Xtemp;
+            Y[0] += M.isi[j][0] * Xtemp;
             Xtemp *= X[0];
         }
         System.out.print("\n");
@@ -84,25 +84,25 @@ public class Interpolar{
 
     public static void outputFile(Matriks M, Float[] X, Float[] Y, String File) {
         // KAMUS LOKAL
-        float Xtemp = 1f;
+        float Xtemp = 1;
         int j;
         PrintWriter file;
         //ALGORITMA
         try{
             file = new PrintWriter(File);
+            Y[0] = 0f;
             System.out.print("persamaan polinom yang terbentuk: y = ");
             file.print("persamaan polinom yang terbentuk: y = ");
-            Y[0] = 0f;
-            for (j = 0; j < M.KolEff; j++) {
+            for (j = 0; j < M.BrsEff; j++) {
                 if(j==0){
-                    System.out.printf("%.2f", M.isi[0][j]);
-                    file.printf("%.2f", M.isi[0][j]);
+                    System.out.printf("%.2f", M.isi[j][0], j);
+                    file.printf("%.2f", M.isi[j][0], j);
                 }
                 else{
-                    System.out.printf(" + %.2fx^%d", M.isi[0][j], j);
-                    file.printf(" + %.2fx^%d", M.isi[0][j], j);
+                    System.out.printf(" + %.2fx^%d", M.isi[j][0], j);
+                    file.printf(" + %.2fx^%d", M.isi[j][0], j);
                 }
-                Y[0] += M.isi[0][j] * Xtemp;
+                Y[0] += M.isi[j][0] * Xtemp;
                 Xtemp *= X[0];
             }
             System.out.print("\n");

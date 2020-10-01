@@ -26,7 +26,7 @@ public class Menu{
     public static String menujuFile(){
         //KAMUS LOKAL
         int menujufile = 0;
-        String NamaFile = new String();
+        String NamaFile = "gagal";
         while(menujufile<1 || menujufile>2){
             System.out.println("Apakah anda ingin memasukkan hasil ke dalam file?");
             System.out.println("1. Ya");
@@ -58,7 +58,6 @@ public class Menu{
             System.out.println("6. Keluar");
             read = baca.nextInt();
             spl = 0;
-            file = "gagal";
 
             if(read == 1){
                 while(spl<1 || spl>4){
@@ -108,7 +107,6 @@ public class Menu{
                     Interpolar.inputFile(x, y, X, bacaNamaFile()); 
                 }
                 Interpolar.interpolar(x, y, M, X, Y);
-                Interpolar.output(M, X, Y);
                 file = menujuFile();
                 if(file.equals("gagal")){
                     Interpolar.output(M, X, Y);
