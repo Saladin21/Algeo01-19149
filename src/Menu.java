@@ -23,11 +23,10 @@ public class Menu{
         return darifile==1;
     }
 
-    public static void menujuFile(Matriks M){
+    public static String menujuFile(){
         //KAMUS LOKAL
         int menujufile = 0;
-        String NamaFile;
-        File myObj;
+        String NamaFile = new String();
         while(menujufile<1 || menujufile>2){
             System.out.println("Apakah anda ingin memasukkan hasil ke dalam file?");
             System.out.println("1. Ya");
@@ -35,30 +34,18 @@ public class Menu{
             menujufile = baca.nextInt();
             baca.nextLine();
             if(menujufile==1){
-                try {
-                    System.out.print("Masukkan Nama file: ");
-                    NamaFile = Menu.baca.nextLine();
-                    myObj = new File(NamaFile);
-                    if (myObj.createNewFile()) {
-                      Matriks.TulisFile(M, NamaFile);
-                    } 
-                    else {
-                      System.out.println("Nama file telah digunakan.");
-                    }
-                } 
-                catch (IOException e) {
-                    System.out.println("Ini adalah pesan error");
-                    //e.printStackTrace();
-                }
+                System.out.print("Masukkan Nama file: ");
+                NamaFile = Menu.baca.nextLine();
             }
         }
+        return NamaFile;
     }
     public static void main(String[] args) throws FileNotFoundException{
         /*KAMUS */
         boolean exit = false;
         Scanner baca = new Scanner(System.in);
         int spl = 0, read = 0;
-        String file;
+        String file = "gagal";
         /*ALGORITMA */
 
         while(!exit){
@@ -71,6 +58,7 @@ public class Menu{
             System.out.println("6. Keluar");
             read = baca.nextInt();
             spl = 0;
+            file = "gagal";
 
             if(read == 1){
                 while(spl<1 || spl>4){
@@ -121,7 +109,13 @@ public class Menu{
                 }
                 Interpolar.interpolar(x, y, M, X, Y);
                 Interpolar.output(M, X, Y);
-                menujuFile(M);
+                file = menujuFile();
+                if(file.equals("gagal")){
+                    Interpolar.output(M, X, Y);
+                }
+                else{
+                    Interpolar.outputFile(M, X, Y, file);
+                }
             }
             else if (read==5){
                 Matriks x = new Matriks(), y = new Matriks(), M = new Matriks(), X = new Matriks();
@@ -133,7 +127,13 @@ public class Menu{
                     Regresi.inputFile(x, y, X, bacaNamaFile()); 
                 }
                 Regresi.regresi(x, y, M, X);
-                Regresi.output(M, X, Y);
+                file = menujuFile();
+                if(file.equals("gagal")){
+                    Regresi.output(M, X, Y);
+                }
+                else{
+                    Regresi.outputFile(M, X, Y, file);
+                }
             }
             else if (read==6){
                 exit = true;
