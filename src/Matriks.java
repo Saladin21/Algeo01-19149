@@ -207,8 +207,10 @@ public class Matriks {
                 Matriks.TukarBrs(M, max, k);
 
                 for (i=k+1;i<=M.LastIdxBrs;i++){
+                    if(M.isi[k][k] != 0){
                     pengali = M.isi[i][k] / M.isi[k][k];
                     Matriks.TambahBrs(M, i, k, (pengali*-1));
+                    }
                 }                
             }
 

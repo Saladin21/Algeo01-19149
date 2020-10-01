@@ -4,17 +4,19 @@ import java.util.Scanner;
 public class Interpolar{
     public static void inputUser(Matriks x, Matriks y, Float[] X) {
         // KAMUS LOKAL
+        System.out.print("Masukkan derajat polinom: ");
         int n = Menu.baca.nextInt();
         Matriks.MakeEmpty(x, 1, n + 1);
         Matriks.MakeEmpty(y, 1, n + 1);
 
         // ALGORITMA
         for (int i = 0; i <= n; i++) {
+            System.out.print("Masukkan nilai titik ke-"+i+": ");
             x.isi[0][i] = Menu.baca.nextFloat();
             y.isi[0][i] = Menu.baca.nextFloat();
         }
+        System.out.print("Masukkan nilai X dari titik yang akan di taksir: ");
         X[0] = Menu.baca.nextFloat();
-        System.out.print(X);
     }
 
     public static void inputFile(Matriks x, Matriks y, Float[] X, String file) throws FileNotFoundException {
@@ -52,7 +54,6 @@ public class Interpolar{
             Mtemp.isi[i][Mtemp.LastIdxKol] = y.isi[0][i];
         }
         SPL.Cramer(Mtemp, M);
-        Matriks.TulisLayar(M);
         Y[0] = 0f;
         for (j = 0; j < M.KolEff; j++) {
             Y[0] += M.isi[0][j] * Xtemp;
@@ -61,8 +62,8 @@ public class Interpolar{
 
     }
 
-    public static void output(Float[] Y) {
-        System.out.print(Y[0]);
+    public static void output(Float[] X, Float[] Y) {
+        System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n");
     }
 /*
     public static void main(String[] args) throws FileNotFoundException {
