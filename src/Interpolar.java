@@ -4,24 +4,20 @@ import java.util.Scanner;
 public class Interpolar{
     public static void inputUser(Matriks x, Matriks y, Float[] X) {
         // KAMUS LOKAL
-        Scanner baca = new Scanner(System.in);
-        int n = baca.nextInt();
+        int n = Menu.baca.nextInt();
         Matriks.MakeEmpty(x, 1, n + 1);
         Matriks.MakeEmpty(y, 1, n + 1);
 
         // ALGORITMA
         for (int i = 0; i <= n; i++) {
-            x.isi[0][i] = baca.nextFloat();
-            y.isi[0][i] = baca.nextFloat();
+            x.isi[0][i] = Menu.baca.nextFloat();
+            y.isi[0][i] = Menu.baca.nextFloat();
         }
-        X[0] = baca.nextFloat();
+        X[0] = Menu.baca.nextFloat();
         System.out.print(X);
-        // tinggal pake fungsi dari SPL
-        baca.close();
-
     }
 
-    public static void inputFile(final Matriks x, final Matriks y, Float X, final String file) throws FileNotFoundException {
+    public static void inputFile(Matriks x, Matriks y, Float[] X, String file) throws FileNotFoundException {
         // KAMUS LOKAL
         FileInputStream data = new FileInputStream(file);
         Scanner baca = new Scanner(data);
@@ -34,7 +30,7 @@ public class Interpolar{
             x.isi[0][i] = baca.nextFloat();
             y.isi[0][i] = baca.nextFloat();
         }
-        X = baca.nextFloat();
+        X[0] = baca.nextFloat();
         // tinggal pake fungsi dari SPL
         baca.close();
 
@@ -68,7 +64,7 @@ public class Interpolar{
     public static void output(Float[] Y) {
         System.out.print(Y[0]);
     }
-
+/*
     public static void main(String[] args) throws FileNotFoundException {
         // KAMUS
         Matriks x = new Matriks(), y = new Matriks();
@@ -78,4 +74,5 @@ public class Interpolar{
         interpolar(x, y, X, Y);
         output(Y);
     }
+*/
 }

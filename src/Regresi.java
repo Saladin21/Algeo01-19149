@@ -2,26 +2,25 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Regresi{
-    public static void inputUser(Matriks x, Matriks y, Matriks X){
+    public static void inputUser(Matriks x, Matriks y, Matriks X) throws FileNotFoundException{
         //KAMUS LOKAL
-        Scanner baca = new Scanner(System.in);
         int k, n;
         //ALGORITMA
-        k = baca.nextInt();
-        n = baca.nextInt();
+        k = Menu.baca.nextInt();
+        n = Menu.baca.nextInt();
         Matriks.MakeEmpty(x, n, k);
         Matriks.MakeEmpty(y, n, 1);
         Matriks.MakeEmpty(X, 1, k);
         for(int i = 0; i<n; i++){
             for(int j = 0; j<k; j++){
-                x.isi[i][j] = baca.nextFloat();
+                x.isi[i][j] = Menu.baca.nextFloat();
             }
-            y.isi[i][0] = baca.nextFloat();
+            y.isi[i][0] = Menu.baca.nextFloat();
         }
         for(int i = 0; i<k; i++){
-            X.isi[0][i] = baca.nextFloat();
+            X.isi[0][i] = Menu.baca.nextFloat();
         }
-        baca.close();
+        Menu.baca.close();
     }
 
     public static void inputFile(Matriks x, Matriks y, Matriks X, String file) throws FileNotFoundException{
@@ -80,14 +79,15 @@ public class Regresi{
     public static void output(Float[] Y){
         System.out.print(Y[0]);
     }
-
+/*
     public static void main(String[] args) throws FileNotFoundException {
         // KAMUS
         Matriks x = new Matriks(), y = new Matriks(), X = new Matriks();
         Float[] Y = new Float[]{0f};
         //ALGORITMA
-        inputFile(x, y, X, "Studi Kasus 8 titik.txt");
+        inputUser(x, y, X);
         regresi(x, y, X, Y);
         output(Y);
     }
+*/
 }
