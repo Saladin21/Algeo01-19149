@@ -14,7 +14,6 @@ public class Interpolar{
             y.isi[0][i] = Menu.baca.nextFloat();
         }
         X[0] = Menu.baca.nextFloat();
-        System.out.print(X);
     }
 
     public static void inputFile(Matriks x, Matriks y, Float[] X, String file) throws FileNotFoundException {
@@ -52,7 +51,6 @@ public class Interpolar{
             Mtemp.isi[i][Mtemp.LastIdxKol] = y.isi[0][i];
         }
         SPL.Cramer(Mtemp, M);
-        Matriks.TulisLayar(M);
         Y[0] = 0f;
         for (j = 0; j < M.KolEff; j++) {
             Y[0] += M.isi[0][j] * Xtemp;
