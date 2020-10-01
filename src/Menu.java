@@ -56,27 +56,19 @@ public class Menu{
             System.out.println("4. Interpolasi Polinom");
             System.out.println("5. Regresi linier berganda");
             System.out.println("6. Keluar");
+            System.out.print("Silahkan pilih menu: ");
             read = baca.nextInt();
+            System.out.print("\n");
             spl = 0;
 
             if(read == 1){
                 SPL.SPLMenu();
             }
             else if (read==2){
-                while(spl<1 || spl>2){
-                    System.out.println("1. Reduksi Baris");
-                    System.out.println("2. Ekspansi Kofaktor");
-                    spl = baca.nextInt();
-                }
-                if(spl==1){
-
-                }
-                else if(spl==2){
-                    
-                }
+                Matriks.MenuDeterminan();
             }
             else if (read==3){
-
+                Matriks.MenuInverse();
             }
             else if (read==4){
                 Matriks x = new Matriks(), y = new Matriks(), M = new Matriks();

@@ -639,40 +639,37 @@ public class Matriks {
             float determinan;
             if (M.BrsEff == M.KolEff) {
                 determinan = Matriks.DeterminanKofaktor(M);
-                System.out.printf(
-                        "Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah %.2f\n",
-                        determinan);
+                System.out.printf("Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah %.2f\n",determinan);
+                System.out.print("\n");
             } else {
-                System.out.println(
-                        "Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                System.out.print("\n");
             }
         } else {
             float determinan;
             if (M.BrsEff == M.KolEff) {
                 if (M.NbElmt == 1) {
                     determinan = M.isi[0][0];
-                    System.out.printf(
-                            "Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",
-                            determinan);
+                    System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
+                    System.out.print("\n");
                 } else {
                     determinan = Matriks.DeterminanReduksiBaris(M);
                     System.out.println("Setelah dilakukan reduksi baris pada matriks, maka matriks tersebut menjadi");
                     Matriks.TulisLayar(M);
                     System.out.print("\n");
-                    System.out.printf(
-                            "Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",
-                            determinan);
+                    System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
+                    System.out.print("\n");
                 }
             } else {
-                System.out.println(
-                        "Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                System.out.print("\n");
             }
 
         }
     }
 
     public static void MenuInverse(){
-        int menuInput, metodeInput;
+        int menuInput;
         Matriks M = new Matriks();
         do{
             System.out.println("Pilih input: ");
@@ -697,11 +694,12 @@ public class Matriks {
             if(M.NbElmt == 1){
                 if (M.isi[0][0] != 0){
                     M.isi[0][0] = 1 / M.isi[0][0];
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
+                    System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(M);
                     System.out.print("\n");
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
+                    System.out.print("\n");
                 }
             } else if (M.NbElmt == 4){
                 if (Matriks.DeterminanKofaktor(M) != 0){
@@ -716,25 +714,28 @@ public class Matriks {
                             M.isi[i][j] *= 1 / determinan;
                         }
                     }
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
+                    System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(M);
                     System.out.print("\n");
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
+                    System.out.print("\n");
                 }
             } else{
                 Matriks invers = new Matriks();
                 if (Matriks.DeterminanKofaktor(M) != 0){
                     invers = Matriks.inverseMatriks(M);
-                    System.out.printf("Maka inver dari matriks tersebut adalah\n");
+                    System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(invers);
                     System.out.print("\n");
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
+                    System.out.print("\n");
                 }
             }
         } else{
             System.out.println("Matriks tersebut tidak memiliki invers");
+            System.out.print("\n");
         }
     
     }
