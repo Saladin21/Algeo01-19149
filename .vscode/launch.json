@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Menu",
+            "request": "launch",
+            "mainClass": "src.Menu",
+            "projectName": "Algeo01-19149_9dfd172e"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SPL",
             "request": "launch",
             "mainClass": "SPL",

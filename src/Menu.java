@@ -60,26 +60,7 @@ public class Menu{
             spl = 0;
 
             if(read == 1){
-                while(spl<1 || spl>4){
-                    System.out.println("1. Metode Eliminasi Gauss");
-                    System.out.println("2. Metode Eliminasi Gauss-Jordan");
-                    System.out.println("3. Metode Matriks balikan");
-                    System.out.println("4. Kaidah Cramer");
-                    spl = baca.nextInt();
-                }
-                if(spl==1){
-                    file = bacaNamaFile();
-                    System.out.print(file);
-                }
-                else if(spl==2){
-                    
-                }
-                else if(spl==3){
-                    
-                }
-                else if(spl==3){
-                    
-                }
+                SPL.SPLMenu();
             }
             else if (read==2){
                 while(spl<1 || spl>2){

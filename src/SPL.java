@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class SPL {
     public static int Cramer(Matriks M, Matriks Mhsl) {
@@ -228,6 +229,48 @@ public class SPL {
         }
     }
 
+    public static void SimpanHasil(Matriks Mhsl, String File){
+        PrintWriter file;
+        int i, j;
+        try{
+        file = new PrintWriter(File);
+        file.println("Solusi SPL adalah: ");
+
+        for (i = Mhsl.FirsIdxBrs; i <= Mhsl.LastIdxBrs; i++) {
+            for (j = Mhsl.FirstIdxKol; j <= Mhsl.LastIdxKol; j++) {
+                boolean first = true;
+                if (j == 0) {
+                    if (Mhsl.isi[i][j] != 0) {
+                        file.printf("X%d = %.2f ", (i + 1), Mhsl.isi[i][j]);
+                        first = false;
+                    } else {
+                        file.printf("X%d = ", (i + 1));
+                    }
+                } else {
+                    if (Mhsl.isi[i][j] != 0) {
+                        if (!first && Mhsl.isi[i][j] > 0) {
+                            file.print("+");
+                            first = false;
+                        }
+                        if (Mhsl.isi[i][j] == 1) {
+                            file.printf(" X%d ", (j));
+                        } else {
+                            file.printf(" %.2fX%d ", Mhsl.isi[i][j], (j));
+                        }
+                    }
+                }
+            }
+            file.println("");
+        }
+        file.close();
+
+        }
+        catch(IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
     public static void SPLMenu() {
         /**KAMUS LOKAL */
         int input = 0;
@@ -235,7 +278,7 @@ public class SPL {
         int kategori;
         Matriks M = new Matriks();
         Matriks Mhsl = new Matriks();
-        char simpan = 'z';
+        String namaFile = "";
         /**ALGORITMA */
         while (input != 1 && input != 2){
             System.out.println("Pilih input: ");
@@ -253,7 +296,6 @@ public class SPL {
         else{
             try{
             Matriks.BacaFile(M);
-            Matriks.TulisLayar(M);
             }
             catch(Exception e){
                 System.out.println("Error");
@@ -291,17 +333,18 @@ public class SPL {
         else if (kategori == 2){
             System.out.println("SPL tidak memiliki solusi tunggal.");
             SPL.TulisHasil(Mhsl);
+            namaFile = Menu.menujuFile();
+            if (namaFile != ""){
+            SPL.SimpanHasil(Mhsl, namaFile);
+            }
             
         }
         else{
             System.out.println("Solusi SPL berturut-turut adalah: ");
             SPL.TulisHasil(Mhsl);
-            while (simpan != 'y' && simpan != 'n'){
-                System.out.println("Apakah ingin menyimpan hasil? (y/n)");
-                simpan = Menu.baca.next().charAt(0);
-            }
-            if (simpan == 'y'){
-                Matriks.TulisFile(M);
+            namaFile = Menu.menujuFile();
+            if (namaFile != ""){
+            SPL.SimpanHasil(Mhsl, namaFile);
             }
 
         }
