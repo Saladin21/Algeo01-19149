@@ -11,7 +11,7 @@ public class Menu{
         return file;
     }
 
-    public static int darifile(){
+    public static boolean darifile(){
         int darifile = 0;
         while(darifile<1 || darifile>2){
             System.out.println("Mau baca input dari mana?");
@@ -20,7 +20,38 @@ public class Menu{
             darifile = baca.nextInt();
             baca.nextLine();
         }
-        return darifile;
+        return darifile==1;
+    }
+
+    public static void menujuFile(Matriks M){
+        //KAMUS LOKAL
+        int menujufile = 0;
+        String NamaFile;
+        File myObj;
+        while(menujufile<1 || menujufile>2){
+            System.out.println("Apakah anda ingin memasukkan hasil ke dalam file?");
+            System.out.println("1. Ya");
+            System.out.println("2. Tidak");
+            menujufile = baca.nextInt();
+            baca.nextLine();
+            if(menujufile==1){
+                try {
+                    System.out.print("Masukkan Nama file: ");
+                    NamaFile = Menu.baca.nextLine();
+                    myObj = new File(NamaFile);
+                    if (myObj.createNewFile()) {
+                      Matriks.TulisFile(M, NamaFile);
+                    } 
+                    else {
+                      System.out.println("Nama file telah digunakan.");
+                    }
+                } 
+                catch (IOException e) {
+                    System.out.println("Ini adalah pesan error");
+                    //e.printStackTrace();
+                }
+            }
+        }
     }
     public static void main(String[] args) throws FileNotFoundException{
         /*KAMUS */
@@ -64,34 +95,45 @@ public class Menu{
                 }
             }
             else if (read==2){
-                Matriks.MenuDeterminan();
+                while(spl<1 || spl>2){
+                    System.out.println("1. Reduksi Baris");
+                    System.out.println("2. Ekspansi Kofaktor");
+                    spl = baca.nextInt();
+                }
+                if(spl==1){
+
+                }
+                else if(spl==2){
+                    
+                }
             }
             else if (read==3){
-                Matriks.MenuDeterminan();
+
             }
             else if (read==4){
-                Matriks x = new Matriks(), y = new Matriks();
+                Matriks x = new Matriks(), y = new Matriks(), M = new Matriks();
                 Float[] X = new Float[]{0f}, Y = new Float[]{0f};
-                if(darifile()==1){
+                if(darifile()){
                     Interpolar.inputUser(x, y, X);
                 }
                 else{
                     Interpolar.inputFile(x, y, X, bacaNamaFile()); 
                 }
-                Interpolar.interpolar(x, y, X, Y);
-                Interpolar.output(Y);
+                Interpolar.interpolar(x, y, M, X, Y);
+                Interpolar.output(M, X, Y);
+                menujuFile(M);
             }
             else if (read==5){
-                Matriks x = new Matriks(), y = new Matriks(), X = new Matriks();
+                Matriks x = new Matriks(), y = new Matriks(), M = new Matriks(), X = new Matriks();
                 Float[] Y = new Float[]{0f};
-                if(darifile()==1){
+                if(darifile()){
                     Regresi.inputUser(x, y, X);
                 }
                 else{
                     Regresi.inputFile(x, y, X, bacaNamaFile()); 
                 }
-                Regresi.regresi(x, y, X, Y);
-                Regresi.output(Y);
+                Regresi.regresi(x, y, M, X);
+                Regresi.output(M, X, Y);
             }
             else if (read==6){
                 exit = true;
