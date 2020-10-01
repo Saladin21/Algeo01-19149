@@ -64,20 +64,10 @@ public class Menu{
                 }
             }
             else if (read==2){
-                while(spl<1 || spl>2){
-                    System.out.println("1. Reduksi Baris");
-                    System.out.println("2. Ekspansi Kofaktor");
-                    spl = baca.nextInt();
-                }
-                if(spl==1){
-
-                }
-                else if(spl==2){
-                    
-                }
+                Matriks.MenuDeterminan();
             }
             else if (read==3){
-
+                Matriks.MenuDeterminan();
             }
             else if (read==4){
                 Matriks x = new Matriks(), y = new Matriks();
