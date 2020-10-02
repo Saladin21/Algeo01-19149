@@ -41,7 +41,6 @@ public class Interpolar{
     public static void interpolar(Matriks x, Matriks y, Matriks M, Float[] X, Float[] Y) {
         // KAMUS LOKAL
         Matriks Mtemp = new Matriks();
-        float Xtemp = 1f;
         int i, j;
         // ALGORITMA
         Matriks.MakeEmpty(Mtemp, x.KolEff, x.KolEff + 1);
@@ -53,12 +52,6 @@ public class Interpolar{
             Mtemp.isi[i][Mtemp.LastIdxKol] = y.isi[0][i];
         }
         SPL.Cramer(Mtemp, M);
-        Y[0] = 0f;
-        for (j = 0; j < M.KolEff; j++) {
-            Y[0] += M.isi[0][j] * Xtemp;
-            Xtemp *= X[0];
-        }
-
     }
 
     public static void output(Matriks M, Float[] X, Float[] Y) {
@@ -66,7 +59,7 @@ public class Interpolar{
         float Xtemp = 1f;
         int j;
         //ALGORITMA
-        System.out.print("persamaan polinom yang terbentuk: y = ");
+        System.out.print("\npersamaan polinom yang terbentuk:\ny = ");
         Y[0] = 0f;
         for (j = 0; j < M.BrsEff; j++) {
             if(j==0){
@@ -79,7 +72,7 @@ public class Interpolar{
             Xtemp *= X[0];
         }
         System.out.print("\n");
-        System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n");
+        System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n\n");
     }
 
     public static void outputFile(Matriks M, Float[] X, Float[] Y, String File) {
@@ -91,8 +84,8 @@ public class Interpolar{
         try{
             file = new PrintWriter(File);
             Y[0] = 0f;
-            System.out.print("persamaan polinom yang terbentuk: y = ");
-            file.print("persamaan polinom yang terbentuk: y = ");
+            System.out.print("\npersamaan polinom yang terbentuk:\ny = ");
+            file.print("\npersamaan polinom yang terbentuk:\ny = ");
             for (j = 0; j < M.BrsEff; j++) {
                 if(j==0){
                     System.out.printf("%.2f", M.isi[j][0], j);
@@ -107,8 +100,8 @@ public class Interpolar{
             }
             System.out.print("\n");
             file.print("\n");
-            System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n");
-            file.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n");
+            System.out.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n\n");
+            file.print("nilai dari y untuk x = "+ X[0] +" adalah " + Y[0] + "\n\n");
             file.close();
         }
         catch(IOException e) {

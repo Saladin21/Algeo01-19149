@@ -78,12 +78,12 @@ public class Regresi{
         // KAMUS LOKAL
         int j;
         //ALGORITMA
-        System.out.print("persamaan polinom yang terbentuk: y = ");
-        System.out.printf("%.2fx%d", M.isi[0][0], 1);
-        Y[0] = M.isi[0][0]*X.isi[0][0];
+        System.out.print("persamaan regresi yang terbentuk: y = ");
+        System.out.printf("%.2f", M.isi[0][0]);
+        Y[0] = M.isi[0][0];
         for (j = 1; j < M.BrsEff; j++) {
-            System.out.printf(" + %.2fx%d", M.isi[j][0], j+1);
-            Y[0] += M.isi[j][0]*X.isi[0][j];
+            System.out.printf(" + %.2fx%d", M.isi[j][0], j);
+            Y[0] += M.isi[j][0]*X.isi[0][j-1];
         }
         System.out.print("\n");
         System.out.print("Berdasarkan regresi linier berganda, hampiran dari nilai y adalah " + Y[0] + "\n");
@@ -97,18 +97,18 @@ public class Regresi{
         try{
             file = new PrintWriter(File);
 
-            System.out.print("persamaan polinom yang terbentuk: y = ");
-            file.print("persamaan polinom yang terbentuk: y = ");
+            System.out.print("persamaan regresi yang terbentuk: y = ");
+            file.print("persamaan regresi yang terbentuk: y = ");
 
-            System.out.printf("%.2fx%d", M.isi[0][0], 1);
-            file.printf("%.2fx%d", M.isi[0][0], 1);
+            System.out.printf("%.2f", M.isi[0][0]);
+            file.printf("%.2f", M.isi[0][0]);
 
-            Y[0] = M.isi[0][0]*X.isi[0][0];
+            Y[0] = M.isi[0][0];
             for (j = 1; j < M.BrsEff; j++) {
-                System.out.printf(" + %.2fx%d", M.isi[j][0], j+1);
-                file.printf(" + %.2fx%d", M.isi[j][0], j+1);
+                System.out.printf(" + %.2fx%d", M.isi[j][0], j);
+                file.printf(" + %.2fx%d", M.isi[j][0], j);
 
-                Y[0] += M.isi[j][0]*X.isi[0][j];
+                Y[0] += M.isi[j][0]*X.isi[0][j-1];
             }
             System.out.print("\n");
             file.print("\n");
