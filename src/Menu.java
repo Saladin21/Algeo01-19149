@@ -31,6 +31,7 @@ public class Menu{
             System.out.println("Apakah anda ingin memasukkan hasil ke dalam file?");
             System.out.println("1. Ya");
             System.out.println("2. Tidak");
+            System.out.print("Silahkan memilih: ");
             menujufile = baca.nextInt();
             baca.nextLine();
             if(menujufile==1){

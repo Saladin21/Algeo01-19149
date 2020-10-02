@@ -641,9 +641,57 @@ public class Matriks {
                 determinan = Matriks.DeterminanKofaktor(M);
                 System.out.printf("Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah %.2f\n",determinan);
                 System.out.print("\n");
+                String File = Menu.menujuFile();
+                if(File.equals("gagal")){
+                    System.out.println("Maaf penyimpanan file gagal :(");
+                }
+                else{
+                    // KAMUS LOKAL
+                    PrintWriter file;
+                    //ALGORITMA
+                    try{
+                        file = new PrintWriter(File);
+                        for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                            for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                file.printf("%.2f ", M.isi[i][j]);
+                            }
+                            file.print("\n");
+                        }
+                        file.printf("Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah %.2f\n",determinan);
+                        file.close();
+                    }
+                    catch(IOException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                }
             } else {
                 System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
                 System.out.print("\n");
+                String File = Menu.menujuFile();
+                if(File.equals("gagal")){
+                    System.out.println("Maaf penyimpanan file gagal :(");
+                }
+                else{
+                    // KAMUS LOKAL
+                    PrintWriter file;
+                    //ALGORITMA
+                    try{
+                        file = new PrintWriter(File);
+                        for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                            for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                file.printf("%.2f ", M.isi[i][j]);
+                            }
+                            file.print("\n");
+                        }
+                        file.printf("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                        file.close();
+                    }
+                    catch(IOException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                }
             }
         } else {
             float determinan;
@@ -652,17 +700,99 @@ public class Matriks {
                     determinan = M.isi[0][0];
                     System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if(File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan file gagal :(");
+                    }
+                    else{
+                        // KAMUS LOKAL
+                        PrintWriter file;
+                        //ALGORITMA
+                        try{
+                            file = new PrintWriter(File);
+                            for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                                for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                    file.printf("%.2f ", M.isi[i][j]);
+                                }
+                                file.print("\n");
+                            }
+                            file.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
+                            file.close();
+                        }
+                        catch(IOException e) {
+                            System.out.println("An error occurred.");
+                            e.printStackTrace();
+                        }
+                    }
+
                 } else {
+                    Matriks Mbaru = new Matriks();
+                    Matriks.CopyMatriks(M, Mbaru);
                     determinan = Matriks.DeterminanReduksiBaris(M);
                     System.out.println("Setelah dilakukan reduksi baris pada matriks, maka matriks tersebut menjadi");
                     Matriks.TulisLayar(M);
                     System.out.print("\n");
                     System.out.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if(File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan file gagal :(");
+                    }
+                    else{
+                        // KAMUS LOKAL
+                        PrintWriter file;
+                        //ALGORITMA
+                        try{
+                            file = new PrintWriter(File);
+                            for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                                for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                    file.printf("%.2f ", Mbaru.isi[i][j]);
+                                }
+                                file.print("\n");
+                            }
+                            file.println("Setelah dilakukan reduksi baris pada matriks, maka matriks tersebut menjadi");
+                            for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                                for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                    file.printf("%.2f ", M.isi[i][j]);
+                                }
+                                file.print("\n");
+                            }
+                            file.printf("Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah %.2f\n",determinan);
+                            file.close();
+                        }
+                        catch(IOException e) {
+                            System.out.println("An error occurred.");
+                            e.printStackTrace();
+                        }
+                    }
                 }
             } else {
                 System.out.println("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
                 System.out.print("\n");
+                String File = Menu.menujuFile();
+                if(File.equals("gagal")){
+                    System.out.println("Maaf penyimpanan file gagal :(");
+                }
+                else{
+                    // KAMUS LOKAL
+                    PrintWriter file;
+                    //ALGORITMA
+                    try{
+                        file = new PrintWriter(File);
+                        for (int i = M.FirsIdxBrs; i<= M.LastIdxBrs; i++){
+                            for (int j = M.FirstIdxKol; j<=M.LastIdxKol;j++){
+                                file.printf("%.2f ", M.isi[i][j]);
+                            }
+                            file.print("\n");
+                        }
+                        file.printf("Maaf tidak dapat menentukan determinan matriks dengan ukuran baris dan kolom yang berbeda");
+                        file.close();
+                    }
+                    catch(IOException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                }
             }
 
         }
@@ -693,16 +823,32 @@ public class Matriks {
             float determinan;
             if(M.NbElmt == 1){
                 if (M.isi[0][0] != 0){
+                    Matriks Mcopy = new Matriks();
+                    Matriks.CopyMatriks(M, Mcopy);
                     M.isi[0][0] = 1 / M.isi[0][0];
                     System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(M);
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.outputfileInvers(Mcopy, M, File);
+                    }
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.ouputnoinvers(M, File);
+                    }
                 }
             } else if (M.NbElmt == 4){
                 if (Matriks.DeterminanKofaktor(M) != 0){
+                    Matriks Mcopy = new Matriks();
+                    Matriks.CopyMatriks(M, Mcopy);
                     determinan = Matriks.DeterminanKofaktor(M);
                     float temp = M.isi[0][0];
                     M.isi[0][0] = M.isi[1][1];
@@ -717,9 +863,21 @@ public class Matriks {
                     System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(M);
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.outputfileInvers(Mcopy, M, File);
+                    }
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.ouputnoinvers(M, File);
+                    }
                 }
             } else{
                 Matriks invers = new Matriks();
@@ -728,17 +886,86 @@ public class Matriks {
                     System.out.printf("Maka invers dari matriks tersebut adalah\n");
                     TulisLayar(invers);
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.outputfileInvers(M, invers, File);
+                    }
                 } else{
                     System.out.println("Matriks tersebut tidak memiliki invers");
                     System.out.print("\n");
+                    String File = Menu.menujuFile();
+                    if (File.equals("gagal")){
+                        System.out.println("Maaf penyimpanan gagal :(");
+                    } else{
+                        Matriks.ouputnoinvers(M, File);
+                    }
                 }
             }
         } else{
             System.out.println("Matriks tersebut tidak memiliki invers");
             System.out.print("\n");
+            String File = Menu.menujuFile();
+            if (File.equals("gagal")){
+                System.out.println("Maaf penyimpanan gagal :(");
+            } else{
+                Matriks.ouputnoinvers(M, File);
+            }
         }
     
     }
+
+    public static void outputfileInvers(Matriks Mawal, Matriks Makhir, String File){
+        // KAMUS LOKAL
+        PrintWriter file;
+        //ALGORITMA
+        try{
+            file = new PrintWriter(File);
+            for (int i = Mawal.FirsIdxBrs; i<= Mawal.LastIdxBrs; i++){
+                for (int j = Mawal.FirstIdxKol; j<=Mawal.LastIdxKol;j++){
+                    file.printf("%.2f ", Mawal.isi[i][j]);
+                }
+                file.print("\n");
+            }
+            file.printf("Maka invers dari matriks tersebut adalah\n");
+            for (int i = Makhir.FirsIdxBrs; i<= Makhir.LastIdxBrs; i++){
+                for (int j = Makhir.FirstIdxKol; j<=Makhir.LastIdxKol;j++){
+                    file.printf("%.2f ", Makhir.isi[i][j]);
+                }
+                file.print("\n");
+            }
+            System.out.print("\n");
+            file.close();
+        }
+        catch(IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void ouputnoinvers(Matriks Mawal, String File){
+        // KAMUS LOKAL
+        PrintWriter file;
+        //ALGORITMA
+        try{
+            file = new PrintWriter(File);
+            for (int i = Mawal.FirsIdxBrs; i<= Mawal.LastIdxBrs; i++){
+                for (int j = Mawal.FirstIdxKol; j<=Mawal.LastIdxKol;j++){
+                    file.printf("%.2f ", Mawal.isi[i][j]);
+                }
+                file.print("\n");
+            }
+            file.printf("Matriks tersebut tidak memiliki invers\n");
+            System.out.print("\n");
+            file.close();
+        }
+        catch(IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         Matriks M = new Matriks();
         Matriks.BacaKeyboard(M);

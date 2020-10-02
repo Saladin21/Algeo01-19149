@@ -1,0 +1,8 @@
+1.00 4.00 2.00 
+5.00 6.00 3.00 
+1.00 1.00 9.00 
+Setelah dilakukan reduksi baris pada matriks, maka matriks tersebut menjadi
+1.00 4.00 2.00 
+5.00 6.00 3.00 
+1.00 1.00 9.00 
+Determinan matriks tersebut dengan menggunakan metode reduksi baris adalah -119.00

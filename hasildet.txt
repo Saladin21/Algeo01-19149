@@ -1,0 +1,3 @@
+4.00 8.00 
+1.00 3.00 
+Determinan matriks tersebut dengan menggunakan metode ekspansi kofaktor adalah 4.00
