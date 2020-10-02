@@ -224,6 +224,7 @@ public class Matriks {
         float lead;
         float pengali;
         /**ALGORITMA */
+        System.out.print("\n");
             if (M.BrsEff<M.KolEff-1){
             M.BrsEff = M.KolEff -1;
             M.LastIdxBrs = M.BrsEff -1;
@@ -236,38 +237,31 @@ public class Matriks {
                         max = i;
                     }
                 }
+                System.out.print("\n"); 
                 Matriks.TukarBrs(M, max, k);
-
+                if(M.isi[k][k] != 0){
+                    KaliBrs(M, k, (1/lead(M, k)));
+                }
+                System.out.print("\n"); 
                 for (i=k+1;i<=M.LastIdxBrs;i++){
-                    if(M.isi[k][k] != 0){
-                    pengali = M.isi[i][k] / M.isi[k][k];
-                    Matriks.TambahBrs(M, i, k, (pengali*-1));
-                    M.isi[i][k] = 0;
-                    }
-                }
-                
+                    TambahBrs(M, i, k, -1*lead(M, i));
+                    M.isi[i][k]=0f;
+                }               
             }
+    }
 
-            i = M.FirsIdxBrs;
-            while (i<=M.LastIdxBrs){
-                j = M.FirstIdxKol;
-                lead = 0;
-                while (lead==0 && j<=M.LastIdxKol){
-                    if (M.isi[i][j]!=0){
-                        lead = M.isi[i][j];
-                    }
-                    else{
-                        j++;
-                    }
-                }
-                if(lead != 0){
-                    Matriks.KaliBrs(M, i, (1/lead));
-                }
-                i++;
-            } 
-
-        
-
+    public static float lead(Matriks M, int i){
+        int j = M.FirstIdxKol;
+        float lead = 0f;
+        while (lead==0 && j<=M.LastIdxKol){
+            if (M.isi[i][j]!=0){
+                lead = M.isi[i][j];
+            }
+            else{
+                j++;
+            }
+        }
+        return lead; 
     }
 
 
@@ -277,6 +271,7 @@ public class Matriks {
         float lead;
         float pengali;
         /**ALGORITMA */
+        System.out.print("\n");
             if (M.BrsEff<M.KolEff-1){
             M.BrsEff = M.KolEff -1;
             M.LastIdxBrs = M.BrsEff -1;
@@ -289,34 +284,20 @@ public class Matriks {
                         max = i;
                     }
                 }
+                System.out.print("\n"); 
                 Matriks.TukarBrs(M, max, k);
-
-                for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
-                    if(i != k && M.isi[k][k]!=0){
-                        pengali = M.isi[i][k] / M.isi[k][k];
-                        Matriks.TambahBrs(M, i, k, (pengali*-1));
-                        M.isi[i][k] = 0;
+                if(M.isi[k][k] != 0){
+                    KaliBrs(M, k, (1/lead(M, k)));
+                }
+                System.out.print("\n"); 
+                for (i=0;i<=M.LastIdxBrs;i++){
+                    if (i!=k){
+                    TambahBrs(M, i, k, -1*lead(M, i));
+                    M.isi[i][k]=0f;
                     }
-                }                
+                }               
             }
-
-            i = M.FirsIdxBrs;
-            while (i<=M.LastIdxBrs){
-                j = M.FirstIdxKol;
-                lead = 0;
-                while (lead==0 && j<=M.LastIdxKol){
-                    if (M.isi[i][j]!=0){
-                        lead = M.isi[i][j];
-                    }
-                    else{
-                        j++;
-                    }
-                }
-                if(lead != 0){
-                    Matriks.KaliBrs(M, i, (1/lead));
-                }
-                i++;
-            } 
+    }
 
         
 

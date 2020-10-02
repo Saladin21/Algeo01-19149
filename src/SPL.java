@@ -144,7 +144,6 @@ public class SPL {
         Matriks A = new Matriks();
         /** ALGORITMA */
         Matriks.MakeReducedEselon(M);
-        Matriks.TulisLayar(M);
         Matriks.MakeEmpty(Mhsl, M.KolEff - 1, M.KolEff);
         Matriks.MakeEmpty(A, M.BrsEff, M.KolEff - 1);
 
@@ -203,8 +202,8 @@ public class SPL {
     public static void TulisHasil(Matriks Mhsl) {
         int i, j;
         for (i = Mhsl.FirsIdxBrs; i <= Mhsl.LastIdxBrs; i++) {
-            boolean first = true;
             for (j = Mhsl.FirstIdxKol; j <= Mhsl.LastIdxKol; j++) {
+                boolean first = true;
                 if (j == 0) {
                     if (Mhsl.isi[i][j] != 0) {
                         System.out.printf("X%d = %.2f ", (i + 1), Mhsl.isi[i][j]);
@@ -216,19 +215,15 @@ public class SPL {
                     if (Mhsl.isi[i][j] != 0) {
                         if (!first && Mhsl.isi[i][j] > 0) {
                             System.out.print("+");
+                            first = false;
                         }
                         if (Mhsl.isi[i][j] == 1) {
                             System.out.printf(" X%d ", (j));
-                            first = false;
                         } else {
                             System.out.printf(" %.2fX%d ", Mhsl.isi[i][j], (j));
-                            first = false;
                         }
                     }
                 }
-            }
-            if (first){
-                System.out.print("0.00");
             }
             System.out.println("");
         }
@@ -242,8 +237,8 @@ public class SPL {
         file.println("Solusi SPL adalah: ");
 
         for (i = Mhsl.FirsIdxBrs; i <= Mhsl.LastIdxBrs; i++) {
-            boolean first = true;
             for (j = Mhsl.FirstIdxKol; j <= Mhsl.LastIdxKol; j++) {
+                boolean first = true;
                 if (j == 0) {
                     if (Mhsl.isi[i][j] != 0) {
                         file.printf("X%d = %.2f ", (i + 1), Mhsl.isi[i][j]);
@@ -264,9 +259,6 @@ public class SPL {
                         }
                     }
                 }
-            }
-            if (first){
-                file.print("0.00");
             }
             file.println("");
         }
