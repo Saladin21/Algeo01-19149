@@ -71,7 +71,7 @@ public class Regresi{
             M.isi[i][M.KolEff-1] = Matriks.JumlahKol(Matriks.KaliAntarKol(x, y, i-1, 0), 0);
         }
 
-        SPL.Cramer(M, M1);
+        SPL.Gauss(M, M1);
     }
 
     public static void output(Matriks M, Matriks X, Float[] Y){

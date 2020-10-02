@@ -51,7 +51,7 @@ public class Interpolar{
             }
             Mtemp.isi[i][Mtemp.LastIdxKol] = y.isi[0][i];
         }
-        SPL.Cramer(Mtemp, M);
+        SPL.Gauss(Mtemp, M);
     }
 
     public static void output(Matriks M, Float[] X, Float[] Y) {
@@ -110,15 +110,32 @@ public class Interpolar{
         }
         
     }
-/*
+
+    public static float sk7(Float f){
+        return (float)((Math.pow(f, 2) + Math.pow(f, 0.5))/(Math.pow(Math.E, f) + f));
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         // KAMUS
-        Matriks x = new Matriks(), y = new Matriks();
+        Matriks x = new Matriks(), y = new Matriks(), M = new Matriks();
         Float[] X = new Float[]{0f}, Y = new Float[]{0f};
+        PrintWriter file;
+        float i;
+        int n;
         //ALGORITMA
-        inputUser(x, y, X);
-        interpolar(x, y, X, Y);
-        output(Y);
+        file = new PrintWriter("datask7.txt");
+        n =Menu.baca.nextInt();
+        file.print(n +"\n");
+        for(i = 0; i<=n; i++){
+            file.printf("%f %f\n", 0+(i*2/n), sk7(0+(i*2/n)));
+        }
+        file.print(0f);
+        file.close();
+        inputFile(x, y, X, "datask7.txt");
+        interpolar(x, y, M, X, Y);
+        output(M, X, Y);
+        System.out.printf("\n%f\n", sk7(0f));
+
     }
-*/
+
 }
