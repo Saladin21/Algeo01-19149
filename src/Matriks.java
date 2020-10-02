@@ -301,8 +301,6 @@ public class Matriks {
 
         
 
-    }
-
     public static void KaliMatriks(Matriks M1, Matriks M2, Matriks MHsl){
         /*KAMUS LOKAL*/
         int i, j, k;
