@@ -10,5 +10,5 @@ Program berhenti berjalan ketika user memilih untuk keluar.
 
 Untuk file yang menjadi input harus berisi:
 1. Input matriks SPL: n bilangan rasional yang dipisahkan oleh spasi pada setiap barisnya
-2. Input interpolasi: baris pertama berisi sebuah bilangan bulat n yang akan menjadi derajat polinom, diikuti dengan n+1 buah titik yang berisi dua buah bilangan yang dipisahkan spasi. Diikuti oleh sebuah bilangan rasional x yang akan ditaksir nilai fungsinya.
+2. Input interpolasi: baris pertama berisi sebuah bilangan bulat n yang akan menjadi derajat polinom, diikuti dengan n+1 baris yang berisi titik(dua buah bilangan yang dipisahkan spasi). Diikuti oleh sebuah bilangan rasional x yang akan ditaksir nilai fungsinya.
 3. Input regresi: baris pertama berisi dua buah bilangan bulat n dan k yang diikuti n baris yang berisi k+1 buah bilangan rasional yang dipisah oleh spasi kemudian diikuti oleh sebuah baris yang berisi k buah bilangan rasional yang dipisahkan spasi yang akan ditaksir nilai fungsinya.
