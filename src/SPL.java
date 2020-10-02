@@ -144,6 +144,7 @@ public class SPL {
         Matriks A = new Matriks();
         /** ALGORITMA */
         Matriks.MakeReducedEselon(M);
+        Matriks.TulisLayar(M);
         Matriks.MakeEmpty(Mhsl, M.KolEff - 1, M.KolEff);
         Matriks.MakeEmpty(A, M.BrsEff, M.KolEff - 1);
 

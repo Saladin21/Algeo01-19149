@@ -14,11 +14,17 @@ public class Matriks {
     int NbElmt;
 
     public static void MakeEmpty(Matriks M, int nb, int nk) { //Membuat matriks dengan ukuran nb x nk
+        int i,j;
         M.BrsEff = nb;
         M.KolEff = nk;
         M.NbElmt = M.BrsEff * M.KolEff;
         M.LastIdxBrs = M.BrsEff - 1 + M.FirsIdxBrs;
-        M.LastIdxKol = M.KolEff -1 + M.FirstIdxKol;        
+        M.LastIdxKol = M.KolEff -1 + M.FirstIdxKol;
+        for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
+            for (j=M.FirstIdxKol;j<=M.LastIdxKol;j++){
+                M.isi[i][j] = 0;
+            }
+        }        
     }
 
     public static void BacaKeyboard(Matriks M){
@@ -236,8 +242,10 @@ public class Matriks {
                     if(M.isi[k][k] != 0){
                     pengali = M.isi[i][k] / M.isi[k][k];
                     Matriks.TambahBrs(M, i, k, (pengali*-1));
+                    M.isi[i][k] = 0;
                     }
-                }                
+                }
+                
             }
 
             i = M.FirsIdxBrs;
@@ -287,6 +295,7 @@ public class Matriks {
                     if(i != k && M.isi[k][k]!=0){
                         pengali = M.isi[i][k] / M.isi[k][k];
                         Matriks.TambahBrs(M, i, k, (pengali*-1));
+                        M.isi[i][k] = 0;
                     }
                 }                
             }
