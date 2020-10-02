@@ -237,18 +237,16 @@ public class Matriks {
                     }
                 }
                 Matriks.TukarBrs(M, max, k);
-
                 for (i=k+1;i<=M.LastIdxBrs;i++){
-                    if(M.isi[k][k] != 0){
+                    if(M.isi[k][k] != 0 && M.isi[k][k] != -0){
                     pengali = M.isi[i][k] / M.isi[k][k];
                     Matriks.TambahBrs(M, i, k, (pengali*-1));
                     M.isi[i][k] = 0;
                     }
                 }
-                
             }
 
-            i = M.FirsIdxBrs;
+            /*i = M.FirsIdxBrs;
             while (i<=M.LastIdxBrs){
                 j = M.FirstIdxKol;
                 lead = 0;
@@ -264,7 +262,7 @@ public class Matriks {
                     Matriks.KaliBrs(M, i, (1/lead));
                 }
                 i++;
-            } 
+            } */
 
         
 
@@ -292,7 +290,7 @@ public class Matriks {
                 Matriks.TukarBrs(M, max, k);
 
                 for (i=M.FirsIdxBrs;i<=M.LastIdxBrs;i++){
-                    if(i != k && M.isi[k][k]!=0){
+                    if(i != k && M.isi[k][k]!=0 && M.isi[k][k] != -0){
                         pengali = M.isi[i][k] / M.isi[k][k];
                         Matriks.TambahBrs(M, i, k, (pengali*-1));
                         M.isi[i][k] = 0;
@@ -300,7 +298,7 @@ public class Matriks {
                 }                
             }
 
-            i = M.FirsIdxBrs;
+            /*i = M.FirsIdxBrs;
             while (i<=M.LastIdxBrs){
                 j = M.FirstIdxKol;
                 lead = 0;
@@ -316,7 +314,7 @@ public class Matriks {
                     Matriks.KaliBrs(M, i, (1/lead));
                 }
                 i++;
-            } 
+            } */
 
         
 

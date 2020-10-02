@@ -81,6 +81,7 @@ public class SPL {
         Matriks A = new Matriks();
         /** ALGORITMA */
         Matriks.MakeEselon(M);
+        Matriks.TulisLayar(M);
         Matriks.MakeEmpty(Mhsl, M.KolEff - 1, M.KolEff);
         Matriks.MakeEmpty(A, M.BrsEff, M.KolEff - 1);
 
@@ -105,7 +106,7 @@ public class SPL {
             }
         }
         if (kategori == 1 || (kategori == 2 && M.BrsEff > M.KolEff - 1)) {
-            Mhsl.isi[Mhsl.LastIdxBrs][0] = M.isi[M.LastIdxKol - 1][M.LastIdxKol];
+            Mhsl.isi[Mhsl.LastIdxBrs][0] = M.isi[M.LastIdxKol - 1][M.LastIdxKol]/M.isi[M.LastIdxKol-1][M.LastIdxKol-1];
             for (i = M.LastIdxKol - 2; i >= 0; i--) {
                 sum = 0;
                 for (j = i + 1; j < M.KolEff - 1; j++) {
@@ -169,7 +170,7 @@ public class SPL {
             }
         }
         if (kategori == 1 || (kategori == 2 && M.BrsEff > M.KolEff - 1)) {
-            Mhsl.isi[Mhsl.LastIdxBrs][0] = M.isi[M.LastIdxKol - 1][M.LastIdxKol];
+            Mhsl.isi[Mhsl.LastIdxBrs][0] = M.isi[M.LastIdxKol - 1][M.LastIdxKol]/M.isi[M.LastIdxKol-1][M.LastIdxKol-1];
             for (i = M.LastIdxKol - 2; i >= 0; i--) {
                 sum = 0;
                 for (j = i + 1; j < M.KolEff - 1; j++) {
